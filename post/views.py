@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect
 
+from math import ceil
 from post.models import Article, Comment
 
 
 def home(request):
-    articles = Article.objects.all()
-    return render(request, 'home.html', {'articles': articles})
+    page = int(request.GET.get('page', 1)) - 1
+    articles = Article.objects.all()[page * 5: (page+1) * 5]
+    pages = ceil(Article.objects.all().count() / 5)
+
+    return render(request, 'home.html',
+                  {'articles': articles, 'pages': range(1, pages + 1)})
 
 
 def detail(request):
