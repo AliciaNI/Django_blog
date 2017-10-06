@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block "content" %}
+{% block content %}
     {% for a in articles %}
 	<h1><a href="/post/detail/?aid={{a.id}}">{{a.title}}</a></h1>
-    {% endfor %}}
+    {% endfor %}
 {% endblock %}

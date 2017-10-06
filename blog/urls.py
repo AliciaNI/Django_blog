@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^post/edit/$', post.edit),
     url(r'^post/delete/$', post.delete),
     url(r'^post/search/$', post.search),
+    url(r'^post/comment/$', post.comment),
 ]

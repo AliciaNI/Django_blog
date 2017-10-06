@@ -8,6 +8,7 @@ class Article(models.Model):
 
 
 class Comment(models.Model):
+    aid = models.IntegerField(default=0)  # Article_id 做关联
     name = models.CharField(max_length=128)
     create = models.DateTimeField(auto_now_add=True)
     content = models.TextField()

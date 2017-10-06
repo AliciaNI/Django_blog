@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{%block content %}
+	<div class="container">
+		<h1>{{article.title}}</h1>
+		<div>
+			<a href="/post/edit/?aid={{article.id}}">编辑</a>
+			<a href="/post/delete/?aid={{article.id}}">删除</a>
+		</div>
+		<div class="info-bar"><span class="date">{{article.create}}</span></div>
+		<hr>
+
+		<div>{{article.content}}</div>
+		<br>
+		<hr>
+		<div>
+			{% for c in comments %}
+			<div>
+				<div>{{c.name}}</div>
+				<div>{{c.create}}</div>
+				<div>{{c.content}}</div>
+			</div>
+			{% endfor %}
+		</div>
+		<form method="POST" action="/post/comment/">
+			{% csrf_token %}
+			<div><input type="text" name="name"></div>
+			<div><textarea name="comment"></textarea></div>
+			<input type="hidden" name="aid" value="{{article.id}}">
+			<input type="submit" name="发表评论">
+		</form>
+	</div>
+{%endblock%}
