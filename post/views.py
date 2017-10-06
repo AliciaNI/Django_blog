@@ -1,7 +1,8 @@
+from math import ceil
 from django.shortcuts import render, redirect
 
-from math import ceil
 from post.models import Article, Comment
+from post.helper import log_client_ip, counter
 
 
 def home(request):
@@ -10,9 +11,12 @@ def home(request):
     pages = ceil(Article.objects.all().count() / 5)
 
     return render(request, 'home.html',
-                  {'articles': articles, 'pages': range(1, pages + 1)})
+                  {'articles': articles,
+                   'pages': range(1, pages + 1)})
 
 
+@log_client_ip
+@counter
 def detail(request):
     aid = int(request.GET.get('aid'))
     article = Article.objects.get(id=aid)
@@ -56,3 +60,7 @@ def comment(request):
 
     Comment.objects.create(aid=aid, name=name, content=comment)
     return redirect('/post/detail/?aid=%s' % aid)
+
+
+def blockers(request):
+    return render(request, 'blockers.html')
