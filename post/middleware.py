@@ -4,13 +4,14 @@ from django.utils.deprecation import MiddlewareMixin
 BLOCKIP = [
     '127.0.0.1',
     '192.168.0.4'
-    '10.0.123.45'
+    '10.0.123.250'
 ]
 
 
 class BlockIP(MiddlewareMixin):
     @staticmethod
     def is_blocked_ip(ip):
+        print('=============',ip)
         return ip in BLOCKIP
 
     def process_request(self, request):
