@@ -2,7 +2,7 @@ import logging
 from redis import Redis
 
 logger = logging.getLogger('django')
-redis = Redis(host='10.0.123.45', port=6379)
+redis = Redis(host='127.0.0.1', port=6379)
 
 
 def log_client_ip(func):
